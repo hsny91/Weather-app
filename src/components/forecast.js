@@ -1,12 +1,14 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState} from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from "@material-ui/core/Grid";
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
+import ForecastService from "../service/forecastService";
+import Result from "./result";
 
 //import { useAuth0 } from "@auth0/auth0-react";
 
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function Forecast(props) {
+export default function Forecast() {
 const classes = useStyles();
   const formReducer = (state, event) => {
     return {
@@ -41,11 +43,11 @@ const classes = useStyles();
     };
   };
   const [city, setCity] = useReducer(formReducer, {});
+  const [forecast, setForecast] = useState([]);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // FamilyService.createFamilyService(family.familyName)
-    //     .then(() => createFamilyMember(family.familyName))
+    setForecast(await ForecastService.getWeatherForecastService(city.cityName))
   };
 
   const handleChange = (event) => {
@@ -56,7 +58,9 @@ const classes = useStyles();
   };
 
   return (
-    <Paper component="form" onSubmit={handleSubmit} className={classes.root}>
+    <>
+     <Grid item>
+     <Paper component="form" onSubmit={handleSubmit} className={classes.root}>
       <IconButton className={classes.iconButton} aria-label="menu">
         <MenuIcon />
       </IconButton>
@@ -74,6 +78,13 @@ const classes = useStyles();
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
     </Paper>
+    </Grid>
+    <Grid item>
+    {forecast.length !==0 &&
+    <Result forecast={forecast}/>}
+    </Grid>
+   
+    </>
   );
 
 }

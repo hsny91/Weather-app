@@ -32,7 +32,6 @@ export default function HomePage() {
         </Alert>
       </Grid>
       <Grid item>
-        {" "}
         <Forecast />
       </Grid>
     </Grid>

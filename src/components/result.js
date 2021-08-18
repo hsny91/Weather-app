@@ -23,6 +23,22 @@ export default function Result(props) {
       <div className="description">
         {props.forecast.data.data[0].weather.description}
       </div>
+     <br></br>
+     <div className="temp">
+       Temparature:
+        {props.forecast.data.data[0].app_temp}
+      </div>
+     <br></br>
+      <div className="sunrise">
+        Sunrise:
+      {props.forecast.data.data[0].sunrise}
+      </div>
+      <br></br>
+      <div className="sunset">
+        Sunset:
+      {props.forecast.data.data[0].sunset}
+      </div>
+      {console.log(props.forecast)}
     </>
   );
 }

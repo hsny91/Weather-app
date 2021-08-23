@@ -14,31 +14,30 @@ export default function Result(props) {
 
   return (
     <>
-      <div className={classes.city} >{props.forecast.data.data[0].city_name}</div>
+      <div className={classes.city} >{props.forecast.data[0].city_name}</div>
       <div>
         <img
-          src={`https://www.weatherbit.io/static/img/icons/${props.forecast.data.data[0].weather.icon}.png`}
+          src={`https://www.weatherbit.io/static/img/icons/${props.forecast.data[0].weather.icon}.png`}
         ></img>
       </div>
       <div className="description">
-        {props.forecast.data.data[0].weather.description}
+        {props.forecast.data[0].weather.description}
       </div>
      <br></br>
      <div className="temp">
        Temparature:
-        {props.forecast.data.data[0].app_temp}
+        {props.forecast.data[0].app_temp}
       </div>
      <br></br>
       <div className="sunrise">
         Sunrise:
-      {props.forecast.data.data[0].sunrise}
+      {props.forecast.data[0].sunrise}
       </div>
       <br></br>
       <div className="sunset">
         Sunset:
-      {props.forecast.data.data[0].sunset}
+      {props.forecast.data[0].sunset}
       </div>
-      {console.log(props.forecast)}
     </>
   );
 }
